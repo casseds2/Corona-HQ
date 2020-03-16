@@ -1,9 +1,11 @@
 export default {
   state: {
     stats: {},
+    dailySummary: [],
   },
   getters: {
     stats: (state) => state['stats'],
+    dailySummary: (state) => state['dailySummary'],
   },
   actions: {
     async fetchStats({ commit }, iso = null) {
@@ -22,10 +24,22 @@ export default {
         console.log(`Error: ${err}`);
       }
     },
+    async fetchDailySummary({ commit }) {
+      try {
+        const response = await fetch('https://covid19.mathdro.id/api/daily');
+        const json = await response.json();
+        commit('setDailySummary', json);
+      } catch (err) {
+        console.log(`Error: ${err}`);
+      }
+    },
   },
   mutations: {
     setStats(state, data) {
       state['stats'] = data;
+    },
+    setDailySummary(state, data) {
+      state['dailySummary'] = data;
     },
   },
 };

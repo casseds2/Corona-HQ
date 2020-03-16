@@ -21,24 +21,23 @@
         </div>
       </div>
     </section>
-    <img
-      v-if="region === 'Global'"
-      class="summary"
-      src="https://covid19.mathdro.id/api/og"
-      alt="Open Graph Summary"
-    />
-  </div>
+    <weekly-summary :chartData="dailySummary" :height="20" :width="100"></weekly-summary>
+  </div>  
 </template>
 
 <script>
+import WeeklySummary from '../components/WeeklySummary';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  components: {
+    WeeklySummary,
+  },
   methods: {
-    ...mapActions(['fetchStats', 'fetchCountries']),
+    ...mapActions(['fetchStats', 'fetchDailySummary', 'fetchCountries']),
   },
   computed: {
-    ...mapGetters(['stats', 'countries']),
+    ...mapGetters(['stats', 'dailySummary', 'countries']),
     iso: function() {
       return this.$route.params.iso;
     },
@@ -74,8 +73,10 @@ export default {
       this.fetchStats(this.iso);
     }
     this.fetchCountries();
+    this.fetchDailySummary();
   },
 };
 </script>
 
-<style></style>
+<style>
+</style>
