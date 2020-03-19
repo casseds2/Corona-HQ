@@ -21,6 +21,7 @@
         </div>
       </div>
     </section>
+    <!-- Responsive Height -->
     <weekly-summary :chartData="dailySummary" :height="20" :width="100"></weekly-summary>
   </div>  
 </template>
