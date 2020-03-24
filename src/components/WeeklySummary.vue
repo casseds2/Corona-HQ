@@ -62,7 +62,7 @@ export default {
     },
     labels: function() {
       return this.lastWeek.map((item) => {
-        return item['reportDateString'];
+        return item['reportDate'];
       });
     },
   },
